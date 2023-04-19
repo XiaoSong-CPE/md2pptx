@@ -1,16 +1,29 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useLocalStorage } from '@vueuse/core'
+import { computed, ref } from 'vue'
 import { useOsTheme, darkTheme, zhCN, dateZhCN, enGB, dateEnGB } from 'naive-ui'
-const theme = useLocalStorage('theme', 'auto')
-const language = useLocalStorage('language', 'auto')
+import { useI18n } from 'vue-i18n'
+// 获取pinia setting store
+import { useSettingStore } from '@/stores/setting'
+const { locale } = useI18n()
+let theme = ref(useSettingStore().$state.theme)
+let language = ref(useSettingStore().$state.language)
+useSettingStore().$subscribe((mutation, state) => {
+  theme.value = state.theme
+  language.value = state.language
+  locale.value = state.language === 'auto' ? navigator.language : state.language
+})
+
 const themeConfig = computed(() => {
-  return theme.value === 'auto' && useOsTheme().value ? darkTheme : null
+  if (theme.value === 'auto') {
+    return useOsTheme().value === 'dark' ? darkTheme : null
+  } else {
+    return theme.value === 'dark' ? darkTheme : null
+  }
 })
 const languageConfig = computed(() => {
   const lang =
     language.value === 'zh-CN' || language.value === 'en-GB'
-      ? language.value
+      ? language
       : navigator.language.slice(0, 2)
   return lang === 'zh-CN'
     ? zhCN
@@ -25,7 +38,7 @@ const languageConfig = computed(() => {
 const dataLanguageConfig = computed(() => {
   const lang =
     language.value === 'zh-CN' || language.value === 'en-GB'
-      ? language.value
+      ? language
       : navigator.language.slice(0, 2)
   return lang === 'zh-CN'
     ? dateZhCN
@@ -40,9 +53,21 @@ const dataLanguageConfig = computed(() => {
 </script>
 
 <template>
-  <NConfigProvider :theme="themeConfig" :locale="languageConfig" :date-locale="dataLanguageConfig">
-    <NaiveProvider>
-      <RouterView />
-    </NaiveProvider>
-  </NConfigProvider>
+  <div>
+    <NConfigProvider
+      :theme="themeConfig"
+      :locale="languageConfig"
+      :date-locale="dataLanguageConfig"
+    >
+      <NLoadingBarProvider>
+        <NDialogProvider>
+          <NNotificationProvider>
+            <NMessageProvider>
+              <RouterView />
+            </NMessageProvider>
+          </NNotificationProvider>
+        </NDialogProvider>
+      </NLoadingBarProvider>
+    </NConfigProvider>
+  </div>
 </template>
