@@ -14,8 +14,6 @@
     "server": "tsc --esModuleInterop server/index.ts && node server/index.js"
   },
   "dependencies": {
-    "@slidev/cli": "^0.40.13",
-    "@slidev/theme-default": "^0.21.2",
     "@types/express": "^4.17.17",
     "@vueuse/core": "^10.0.2",
     "cors": "^2.8.5",
