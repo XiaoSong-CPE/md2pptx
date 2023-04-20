@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
+    "prod": "run-p type-check build-only && tsc --esModuleInterop server/index.ts && node server/index.js",
     "server": "tsc --esModuleInterop server/index.ts && node server/index.js"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "express": "^4.18.2",
     "pinia": "^2.0.34",
     "pptxgenjs": "^3.12.0",
+    "vhost": "^3.0.2",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"

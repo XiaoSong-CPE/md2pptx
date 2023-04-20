@@ -7,6 +7,9 @@ const message = useMessage()
 const text = ref('')
 const loading = ref(false)
 
+// 获取当前不带端口号的完整url
+const url = window.location.href.replace(/:\d+/, '')
+
 function drop(e: DragEvent) {
   e.preventDefault()
   if (e.dataTransfer) {
@@ -66,19 +69,41 @@ function readFileContent() {
 }
 
 async function getPPTX() {
+
+  // 开始转换，显示loading
   loading.value = true
-  const res = await fetch('http://localhost:2003', {
+
+  // 检查文本框是否为空
+  if (text.value === '') {
+    message.error('内容不能为空')
+    loading.value = false
+    return
+  }
+
+  // 发送请求
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'text/plain'
     },
-    body: text.value,
+    body: text.value
   })
   const base64 = await res.text()
+
+  // 检查返回的base64是否为空
+  if (base64 === '') {
+    message.error('转换失败')
+    loading.value = false
+    return
+  }
+
+  // 下载文件
   const link = document.createElement('a')
   link.href = `data:application/vnd.openxmlformats-officedocument.presentationml.presentation;base64,${base64}`
   link.download = 'slides.pptx'
   link.click()
+
+  // 转换完成，关闭loading
   loading.value = false
 }
 </script>
@@ -112,7 +137,8 @@ async function getPPTX() {
                   从文件导入
                 </n-button>
                 <n-button-group
-                  ><n-button disabled> 预览 </n-button> <n-button @click="getPPTX" :loading="loading"> 转换 </n-button></n-button-group
+                  ><n-button disabled> 预览 </n-button>
+                  <n-button @click="getPPTX" :loading="loading"> 转换 </n-button></n-button-group
                 >
               </n-space>
               <n-input type="textarea" :autosize="{ minRows: 5 }" v-model:value="text" />

@@ -128,3 +128,6 @@ dist
 
 # 编译后的服务器文件
 server/index.js
+
+# 编译后的语言文件
+src/locales/*.js
