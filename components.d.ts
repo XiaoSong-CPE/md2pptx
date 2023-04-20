@@ -30,8 +30,6 @@ declare module '@vue/runtime-core' {
     NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Starport: typeof import('vue-starport')['Starport']
-    StarportCarrier: typeof import('vue-starport')['StarportCarrier']
     ThemeBtn: typeof import('./src/components/themeBtn.vue')['default']
   }
 }

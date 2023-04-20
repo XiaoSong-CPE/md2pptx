@@ -8,7 +8,8 @@ export default {
     warning_title: 'Warning',
     warning_content_clear: 'Importing file will clear the original content, continue?',
     warning_positive: 'Confirm',
-    warning_negative: 'Cancel'
+    warning_negative: 'Cancel',
+    info_convert: 'File conversion takes about 1 minute'
   },
   btn: {
     convert: 'Convert',

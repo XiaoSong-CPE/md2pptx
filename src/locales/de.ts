@@ -9,7 +9,8 @@ export default {
     warning_content_clear:
       'Das Importieren einer Datei wird den ursprünglichen Inhalt löschen, fortfahren?',
     warning_positive: 'Bestätigen',
-    warning_negative: 'Abbrechen'
+    warning_negative: 'Abbrechen',
+    info_convert: 'Die Konvertierung einer Datei dauert ca. 1 Minute'
   },
   btn: {
     convert: 'Konvertieren',

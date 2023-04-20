@@ -82,15 +82,28 @@ async function getPPTX() {
     return
   }
 
+  // 提示用户，转换需要一定时间
+  message.info(t('message.info_convert'))
+
+  let res: Response
+  let base64: string
+
   // 发送请求
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'text/plain'
-    },
-    body: text.value
-  })
-  const base64 = await res.text()
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: text.value
+    })
+    base64 = await res.text()
+  } catch (e) {
+    console.error(e)
+    message.error(t('message.error_convert'))
+    loading.value = false
+    return
+  }
 
   // 检查返回的base64是否为空
   if (base64 === '') {
@@ -140,7 +153,9 @@ async function getPPTX() {
                 </n-button>
                 <n-button-group
                   ><n-button disabled> {{ t('btn.preview') }} </n-button>
-                  <n-button @click="getPPTX" :loading="loading"> {{ t('btn.convert') }} </n-button></n-button-group
+                  <n-button @click="getPPTX" :loading="loading">
+                    {{ t('btn.convert') }}
+                  </n-button></n-button-group
                 >
               </n-space>
               <n-input type="textarea" :autosize="{ minRows: 5 }" v-model:value="text" />

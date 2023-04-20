@@ -8,7 +8,8 @@ export default {
     warning_title: '警告',
     warning_content_clear: '导入文件将清空原有内容，是否继续？',
     warning_positive: '确认',
-    warning_negative: '取消'
+    warning_negative: '取消',
+    info_convert: '文件转换大约需要1分钟'
   },
   btn: {
     convert: '转换',
