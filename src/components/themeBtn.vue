@@ -15,13 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useSettingStore } from '@/stores/setting'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 let theme = ref(useSettingStore().$state.theme)
 
-const options = ref([
+const options = computed(() => [
   {
     label: t('btn.theme.auto'),
     key: 'auto'

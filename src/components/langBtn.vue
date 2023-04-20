@@ -11,11 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { useSettingStore } from '@/stores/setting'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-const options = ref([
+const options = computed(() => [
   {
     label: t('btn.lang.auto'),
     key: 'auto'
