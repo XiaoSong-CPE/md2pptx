@@ -4,7 +4,8 @@ import { useMessage, useDialog } from 'naive-ui'
 
 const dialog = useDialog()
 const message = useMessage()
-let text = ref('')
+const text = ref('')
+const loading = ref(false)
 
 function drop(e: DragEvent) {
   e.preventDefault()
@@ -63,6 +64,23 @@ function readFileContent() {
   }
   input.click()
 }
+
+async function getPPTX() {
+  loading.value = true
+  const res = await fetch('http://localhost:2003', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    body: text.value,
+  })
+  const base64 = await res.text()
+  const link = document.createElement('a')
+  link.href = `data:application/vnd.openxmlformats-officedocument.presentationml.presentation;base64,${base64}`
+  link.download = 'slides.pptx'
+  link.click()
+  loading.value = false
+}
 </script>
 
 <template>
@@ -94,7 +112,7 @@ function readFileContent() {
                   从文件导入
                 </n-button>
                 <n-button-group
-                  ><n-button disabled> 预览 </n-button> <n-button> 转换 </n-button></n-button-group
+                  ><n-button disabled> 预览 </n-button> <n-button @click="getPPTX" :loading="loading"> 转换 </n-button></n-button-group
                 >
               </n-space>
               <n-input type="textarea" :autosize="{ minRows: 5 }" v-model:value="text" />
