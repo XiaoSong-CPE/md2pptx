@@ -1,7 +1,9 @@
-import zhCN from './zh-CN'
-import enGB from './en-GB'
+import zh from './zh'
+import en from './en'
+import de from './de'
 
 export default {
-    'zh-CN': zhCN,
-    'en-GB': enGB
+    'zh': zh,
+    'en': en,
+    'de': de
 }

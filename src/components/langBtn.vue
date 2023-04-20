@@ -13,22 +13,28 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useSettingStore } from '@/stores/setting'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const options = ref([
   {
-    label: '自动/Auto',
+    label: t('btn.lang.auto'),
     key: 'auto'
   },
   {
-    label: '中文',
-    key: 'zh-CN'
+    label: t('btn.lang.zh'),
+    key: 'zh'
   },
   {
-    label: 'English',
-    key: 'en-GB'
+    label: t('btn.lang.en'),
+    key: 'en'
+  },
+  {
+    label: t('btn.lang.de'),
+    key: 'de'
   }
 ])
 
-const handleSelect = (key: 'zh-CN' | 'en-GB' | 'auto') => {
+const handleSelect = (key: 'de' | 'zh' | 'en' | 'auto') => {
   useSettingStore().setLanguage(key)
 }
 </script>

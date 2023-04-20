@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useOsTheme, darkTheme, zhCN, dateZhCN, enGB, dateEnGB } from 'naive-ui'
+import { useOsTheme, darkTheme, zhCN, dateZhCN, enGB, dateEnGB, deDE, dateDeDE } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
 // 获取pinia setting store
 import { useSettingStore } from '@/stores/setting'
@@ -21,34 +21,12 @@ const themeConfig = computed(() => {
   }
 })
 const languageConfig = computed(() => {
-  const lang =
-    language.value === 'zh-CN' || language.value === 'en-GB'
-      ? language
-      : navigator.language.slice(0, 2)
-  return lang === 'zh-CN'
-    ? zhCN
-    : lang === 'en-GB'
-    ? enGB
-    : lang === 'zh'
-    ? zhCN
-    : lang === 'en'
-    ? enGB
-    : null
+  const lang = language.value === 'auto' ? navigator.language : language.value
+  return lang === 'zh' ? zhCN : lang === 'en' ? enGB : lang === 'de' ? deDE : null
 })
 const dataLanguageConfig = computed(() => {
-  const lang =
-    language.value === 'zh-CN' || language.value === 'en-GB'
-      ? language
-      : navigator.language.slice(0, 2)
-  return lang === 'zh-CN'
-    ? dateZhCN
-    : lang === 'en-GB'
-    ? dateEnGB
-    : lang === 'zh'
-    ? dateZhCN
-    : lang === 'en'
-    ? dateEnGB
-    : null
+  const lang = language.value === 'auto' ? navigator.language : language.value
+  return lang === 'zh' ? dateZhCN : lang === 'en' ? dateEnGB : lang === 'de' ? dateDeDE : null
 })
 </script>
 

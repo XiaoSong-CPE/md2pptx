@@ -17,19 +17,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useSettingStore } from '@/stores/setting'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 let theme = ref(useSettingStore().$state.theme)
 
 const options = ref([
   {
-    label: '自动/Auto',
+    label: t('btn.theme.auto'),
     key: 'auto'
   },
   {
-    label: 'Light',
+    label: t('btn.theme.light'),
     key: 'light'
   },
   {
-    label: 'Dark',
+    label: t('btn.theme.dark'),
     key: 'dark'
   }
 ])

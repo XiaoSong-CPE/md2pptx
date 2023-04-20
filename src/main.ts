@@ -7,8 +7,8 @@ import messages from './locales/index'
 const i18n = createI18n({
     messages,
     legacy: false,
-    fallbackLocale: 'en-GB',
-    locale: localStorage.getItem('language') || 'auto',
+    fallbackLocale: 'en',
+    locale: localStorage.getItem('language') || navigator.language,
 })
 
 import App from './App.vue'
