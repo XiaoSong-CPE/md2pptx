@@ -1,2 +1,13 @@
-# Vue-init
- Vue项目初始化。默认 + ts + less + Elint + Prettier + naive-ui + vue-i18n
+# md2pptx
+
+transfer markdown file or code into pptx file
+
+Website for test purpose: ppt.cnection.cn
+
+## todo
+
+- transfer history
+- docs for web
+- docs for code
+- about page
+- more...
