@@ -130,7 +130,14 @@ async function getPPTX() {
         <!-- header -->
         <n-space justify="space-between">
           <n-gradient-text type="success">{{ t('message.title') }}</n-gradient-text>
-          <n-space><lang-btn /><theme-btn /></n-space>
+          <n-space>
+            <!-- 语言按钮 -->
+            <lang-btn />
+            <!-- 主题按钮 -->
+            <theme-btn />
+            <!-- 关于按钮 -->
+            <about-btn />
+          </n-space>
         </n-space>
       </n-layout-header>
       <n-layout has-sider position="absolute" style="top: 64px">

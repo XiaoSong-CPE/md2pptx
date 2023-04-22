@@ -9,13 +9,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AboutBtn: typeof import('./src/components/aboutBtn.vue')['default']
     LangBtn: typeof import('./src/components/langBtn.vue')['default']
     MaterialSymbolsBrightnessMedium: typeof import('~icons/material-symbols/brightness-medium')['default']
     MaterialSymbolsDarkMode: typeof import('~icons/material-symbols/dark-mode')['default']
+    MaterialSymbolsInfo: typeof import('~icons/material-symbols/info')['default']
     MaterialSymbolsLanguage: typeof import('~icons/material-symbols/language')['default']
     MaterialSymbolsLightMode: typeof import('~icons/material-symbols/light-mode')['default']
+    NA: typeof import('naive-ui')['NA']
     NButton: typeof import('naive-ui')['NButton']
     NButtonGroup: typeof import('naive-ui')['NButtonGroup']
+    NCode: typeof import('naive-ui')['NCode']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NDropdown: typeof import('naive-ui')['NDropdown']
@@ -26,7 +30,9 @@ declare module '@vue/runtime-core' {
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NLoadingBarProvider: typeof import('naive-ui')['NLoadingBarProvider']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+    NModal: typeof import('naive-ui')['NModal']
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider']
+    NP: typeof import('naive-ui')['NP']
     NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

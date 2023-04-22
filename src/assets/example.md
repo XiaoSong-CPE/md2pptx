@@ -1,5 +1,3 @@
-<template>
- <n-code language="markdown">
 # Title
 
 subtitle
@@ -33,7 +31,3 @@ Subtitle of page 4
 1. Ordered Lists Item 1.
 2. Ordered Lists Item 2.
 3. Ordered Lists Item 3.
-</n-code>
-</template>
-
-<script lang="ts" setup></script>

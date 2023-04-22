@@ -9,5 +9,4 @@ Website for test purpose: https://ppt.cnection.cn
 - transfer history
 - docs for web
 - docs for code
-- about page
 - more...

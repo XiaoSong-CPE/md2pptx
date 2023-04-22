@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useOsTheme, darkTheme, zhCN, dateZhCN, enGB, dateEnGB, deDE, dateDeDE } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
+import hljs from 'highlight.js'
 // 获取pinia setting store
 import { useSettingStore } from '@/stores/setting'
 const { locale } = useI18n()
@@ -36,6 +37,7 @@ const dataLanguageConfig = computed(() => {
       :theme="themeConfig"
       :locale="languageConfig"
       :date-locale="dataLanguageConfig"
+      :hljs="hljs"
     >
       <NLoadingBarProvider>
         <NDialogProvider>
