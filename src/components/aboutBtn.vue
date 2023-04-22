@@ -31,7 +31,6 @@
       >
       <n-code
         language="markdown"
-        show-line-numbers
         :code="`
 # Title
 
