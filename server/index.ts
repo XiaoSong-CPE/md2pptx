@@ -4,15 +4,39 @@ import { exec } from 'child_process'
 import http from 'http'
 import path from 'path'
 import pptxgen from 'pptxgenjs'
+import * as log4js from "log4js";
+
+// 配置日志
+log4js.configure({
+  appenders: {
+    fileLog: {
+      type: "file",
+      filename: ".log",
+      maxLogSize: 10 * 1024 * 1024, // = 10Mb
+    },
+    consoleLog: {
+      type: "stdout"
+    }
+  },
+  categories: {
+    default: { appenders: ["fileLog", "consoleLog"], level: "all" },
+    md2pptx: { appenders: ["fileLog", "consoleLog"], level: "all" },
+  },
+});
+
+const logger = log4js.getLogger("md2pptx");
+logger.level = "all";
 
 // 如果直接运行，就是开发环境。如果被调用，就是生产环境
 const dev = require.main === module
+dev ? logger.info('dev mode on') : logger.info('dev mode off')
 
 // 初始化 express
 const app = express()
 
 // 启动静态文件服务
 app.use(express.static(path.join(__dirname, '../dist')))
+logger.info('静态文件已部署')
 // 解析API文本
 app.use(express.text())
 // 解析json
@@ -35,6 +59,8 @@ app.post('/', (req, res) => {
     (error) => {
       if (error) {
         res.status(500).send(error.message)
+        logger.error('slidev error')
+        logger.error(error)
       } else {
         const files = fs
           .readdirSync(pngPath)
@@ -45,12 +71,13 @@ app.post('/', (req, res) => {
         for (const file of files) {
           const slide = pptx.addSlide()
           slide.background = { path: path.join(pngPath, file) }
-          console.log(file)
+          logger.debug('file list:')
+          logger.debug(file)
         }
 
-        ;(pptx as any).write('base64').then((base64) => {
+        ; (pptx as any).write('base64').then((base64) => {
           // 打印前 100 个字符
-          console.log(base64.slice(0, 100))
+          logger.debug(base64.slice(0, 100))
           res.send(base64)
         })
       }
@@ -61,7 +88,7 @@ app.post('/', (req, res) => {
 if (dev) {
   // 开发环境
   http.createServer(app).listen(80, () => {
-    console.log(`PPT server listening at http://localhost`)
+    logger.info(`PPT server listening at http://localhost`)
   })
 }
 
